@@ -1,3 +1,5 @@
+target/
+
 ### https://raw.github.com/github/gitignore/bfcae73085d01fa0cf2af868eaf51c0141ecbb9f/java.gitignore
 
 *.class
@@ -180,3 +182,4 @@ $RECYCLE.BIN/
 .Trash-*
 
 
+/target/
