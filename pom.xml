@@ -57,7 +57,7 @@
       <version>1.16.6</version>
       <scope>provided</scope>
     </dependency>
-    
+
     <!-- WICKET DEPENDENCIES -->
     <dependency>
       <groupId>org.apache.wicket</groupId>
@@ -65,10 +65,16 @@
       <version>${wicket.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.apache.wicket</groupId>
+      <artifactId>wicket-native-websocket-javax</artifactId>
+      <version>${wicket.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.wicketstuff</groupId>
       <artifactId>wicketstuff-html5</artifactId>
       <version>${wicket.version}</version>
     </dependency>
+
     <!-- OPTIONAL DEPENDENCY
       <dependency>
       <groupId>org.apache.wicket</groupId>
