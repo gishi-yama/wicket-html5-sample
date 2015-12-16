@@ -1,4 +1,8 @@
 window.onload = function() {
-	var ws = new Wicket.WebSocket();
-	setInterval(function() {ws.send('message');}, 1000);
+	var wicketWS = new Wicket.WebSocket();
+	setInterval(function() {
+		if (wicketWS.ws.readyState === 1) {
+			wicketWS.send('message')
+		}
+	}, 1000);
 }
