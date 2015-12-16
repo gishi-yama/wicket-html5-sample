@@ -16,7 +16,7 @@ public class HomePage extends WebPage {
     super(parameters);
     add(new Label("version", getApplication().getFrameworkSettings().getVersion()));
     add(new MyBookmarkablePageLink<>("toGeolocationPage", GeolocationPage.class));
-    add(new MyBookmarkablePageLink<>("toWebSocketPage", WebSocketBehaviorPage.class));
+    add(new MyBookmarkablePageLink<>("toWebSocketBehaviorPage", WebSocketBehaviorPage.class));
     add(new Label("pageName", getPageName()));
   }
 

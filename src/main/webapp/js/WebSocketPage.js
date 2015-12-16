@@ -4,7 +4,7 @@ window.onload = function() {
 		if (Wicket.WebSocket.INSTANCE.ws.readyState === 1) {
 			Wicket.WebSocket.send(new Date().getTime());
 		}
-	}, 5000);
+	}, 1000);
 
 	Wicket.Event.subscribe('/websocket/message', function(jqEvent, message) {
 		var newDiv = document.createElement('div'); 

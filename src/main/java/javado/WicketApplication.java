@@ -1,5 +1,6 @@
 package javado;
 
+import org.apache.wicket.Page;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 
@@ -25,7 +26,12 @@ public class WicketApplication extends WebApplication
   @Override
   public void init() {
     super.init();
-    mountPage("GeolocationPage", GeolocationPage.class);
-    mountPage("WebSocketPage", WebSocketBehaviorPage.class);
+    mount(GeolocationPage.class);
+    mount(WebSocketBehaviorPage.class);
   }
+  
+  public void mount(Class<? extends Page> pageClass) {
+    mountPage(pageClass.getSimpleName(), pageClass);
+  }
+
 }
