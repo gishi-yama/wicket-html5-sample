@@ -14,11 +14,14 @@ public class HomePage extends WebPage {
 
   public HomePage(final PageParameters parameters) {
     super(parameters);
-
     add(new Label("version", getApplication().getFrameworkSettings().getVersion()));
     add(new MyBookmarkablePageLink<>("toGeolocationPage", GeolocationPage.class));
     add(new MyBookmarkablePageLink<>("toWebSocketPage", WebSocketBehaviorPage.class));
+    add(new Label("pageName", getPageName()));
+  }
 
+  public String getPageName() {
+    return getClass().getSimpleName();
   }
 
   /**
