@@ -16,20 +16,22 @@ import org.apache.wicket.protocol.ws.api.registry.IKey;
 import org.apache.wicket.protocol.ws.api.registry.SimpleWebSocketConnectionRegistry;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
-public class WebSocketPage extends HomePage {
+public class WebSocketBehaviorPage extends HomePage {
+  private static final long serialVersionUID = -6048991130742250499L;
 
   private String applicationName;
   private String sessionId;
   private IKey key;
   private IModel<Integer> counterModel;
 
-  public WebSocketPage(final PageParameters parameters) {
+  public WebSocketBehaviorPage(final PageParameters parameters) {
     super(parameters);
     counterModel = Model.of(0);
     val coutner = new Label("counter", counterModel).setOutputMarkupId(true);
     add(coutner);
 
     add(new WebSocketBehavior() {
+      private static final long serialVersionUID = -6393777237087512361L;
 
       @Override
       protected void onConnect(ConnectedMessage message) {

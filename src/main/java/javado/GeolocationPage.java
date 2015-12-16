@@ -8,6 +8,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.wicketstuff.html5.geolocation.AjaxGeolocationBehavior;
 
 public class GeolocationPage extends HomePage {
+  private static final long serialVersionUID = -5936177429144822661L;
 
   public GeolocationPage(final PageParameters parameters) {
     super(parameters);
@@ -16,6 +17,7 @@ public class GeolocationPage extends HomePage {
     add(geolocator);
 
     geolocator.add(new AjaxGeolocationBehavior() {
+      private static final long serialVersionUID = 271096893157786120L;
 
       @Override
       protected void onGeoAvailable(AjaxRequestTarget target, String latitude, String longitude) {
