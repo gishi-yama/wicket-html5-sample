@@ -1,5 +1,7 @@
+/**
+ * @see http://anone.me/html/geolocation-api/
+ */
 function getAccuratePosition(successCallback, errorCallback, option) {
-  console.log("hello4");
   // 位置情報に対応していなければ終了
   if (!navigator.geolocation) {
     var error = new Object();
@@ -13,7 +15,7 @@ function getAccuratePosition(successCallback, errorCallback, option) {
   var watch_id = undefined;
   var timer_id = undefined;
   var position = undefined;
-  var limit = option && option.limit ? option.limit : 30;
+  var limit = option && option.limit ? option.limit : 100;
   var timeout = option && option.timeout ? option.timeout : 0;
 
   // タイムアウトをセット
@@ -39,9 +41,8 @@ function getAccuratePosition(successCallback, errorCallback, option) {
   }
 
   // 取得を実行
-  watch_id = navigator.geolocation.watchPosition(function(p) {
+  watch_id = navigator.geolocation.watchPosition(function(position) {
     // 取得のたびに更新する
-    position = p;
 
     // 求める精度に達すればsuccessCallbackに送る
     if (position.coords.accuracy < limit) {
@@ -60,32 +61,37 @@ function getAccuratePosition(successCallback, errorCallback, option) {
     maximumAge : 0
   });
 }
-// 取得を実行
-function onGeoSuccess(event) {
-  console.log("hello5");
-  document.getElementById("Latitude").value = event.coords.latitude;
-  document.getElementById("Longitude").value = event.coords.longitude;
-  document.getElementById("Accuracy").value = event.coords.accuracy;
-  document.myform.submit();
-}
-function onGeoError(event) {
-  console.log("hello6");
-  console.log("error : " + event.message + '(' + error.code + ')');
-}
-var optionObj = {
-  timeout : 10000
-}
 
-function setLatlon() {
-  console.log("hello3");
-  getAccuratePosition(function(position) {
-    onGeoSuccess(position);
-  }, function(error) {
-    onGeoError(error);
-  });
+function send(position) {
+  if (position) {
+    if (Wicket.WebSocket.INSTANCE.ws.readyState === 1) {
+      var message = position.coords.latitude 
+          + " , "
+          + position.coords.longitude 
+          + " , " 
+          + position.coords.accuracy;
+      Wicket.WebSocket.send(message);
+    }
+  }
+
 }
 
 window.onload = function() {
-  console.log("hello1");
-  setLatlon()
+  setInterval(function() {
+    getAccuratePosition(function(position) {
+      send(position);
+    }, function(error) {
+      console.error('失敗：' + error.message + '(' + error.code + ')')
+    }, {
+      limit : 50,
+      timeout : 4900
+    });
+  }, 5000);
+
+  Wicket.Event.subscribe('/websocket/message', function(jqEvent, message) {
+    var newDiv = document.createElement('div');
+    newDiv.innerHTML = message;
+    var target = document.getElementById('logs');
+    target.appendChild(newDiv);
+  });
 }

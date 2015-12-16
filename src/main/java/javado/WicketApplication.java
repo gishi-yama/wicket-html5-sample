@@ -28,6 +28,7 @@ public class WicketApplication extends WebApplication
     super.init();
     mount(GeolocationPage.class);
     mount(WebSocketBehaviorPage.class);
+    mount(IndividualWebSocketBehaviorPage.class);
   }
   
   public void mount(Class<? extends Page> pageClass) {
