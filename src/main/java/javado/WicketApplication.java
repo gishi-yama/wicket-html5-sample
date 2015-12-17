@@ -4,11 +4,14 @@ import javado.page.CallbackFunctionPage;
 import javado.page.GeolocationPage;
 import javado.page.HomePage;
 import javado.page.IndividualWebSocketBehaviorPage;
+import javado.page.WebPageAsAPI;
 import javado.page.WebSocketBehaviorPage;
 
 import org.apache.wicket.Page;
+import org.apache.wicket.core.request.mapper.MountedMapper;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.request.mapper.parameter.UrlPathPageParametersEncoder;
 
 /**
  * Application object for your web application.
@@ -32,14 +35,20 @@ public class WicketApplication extends WebApplication
   @Override
   public void init() {
     super.init();
-    mount(GeolocationPage.class);
-    mount(WebSocketBehaviorPage.class);
-    mount(IndividualWebSocketBehaviorPage.class);
-    mount(CallbackFunctionPage.class);
+    pageMount(GeolocationPage.class);
+    pageMount(WebSocketBehaviorPage.class);
+    pageMount(IndividualWebSocketBehaviorPage.class);
+    pageMount(CallbackFunctionPage.class);
+    pageMount(WebPageAsAPI.class);
   }
   
-  public void mount(Class<? extends Page> pageClass) {
-    mountPage(pageClass.getSimpleName(), pageClass);
+
+  public void apiMount(Class<? extends Page> pageClass) {
+    mount(new MountedMapper(pageClass.getSimpleName(), pageClass));
+  }
+  
+  public void pageMount(Class<? extends Page> pageClass) {
+    mount(new MountedMapper(pageClass.getSimpleName(), pageClass, new UrlPathPageParametersEncoder()));
   }
 
 }
