@@ -33,12 +33,12 @@ public class IndividualWebSocketBehaviorPage extends HomePage {
         applicationName = message.getApplication().getName();
         sessionId = message.getSessionId();
         key = message.getKey();
-
       }
 
       @Override
       protected void onMessage(WebSocketRequestHandler handler, TextMessage message) {
         val registry = new SimpleWebSocketConnectionRegistry();
+        // sessionId, keyを指定して、接続しているクライアントにメッセージを加工して送信する
         val connection = registry.getConnection(Application.get(applicationName), sessionId, key);
         if (connection != null && connection.isOpen()) {
           try {

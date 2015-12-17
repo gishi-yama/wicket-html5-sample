@@ -44,6 +44,8 @@ public class WebSocketBehaviorPage extends HomePage {
       @Override
       protected void onMessage(WebSocketRequestHandler handler, TextMessage message) {
         val registry = new SimpleWebSocketConnectionRegistry();
+
+        // WebSocket接続しているクライアント全てに、他のクライアントからのメッセージを加工して送信する
         val connections = registry.getConnections(Application.get(applicationName));
         connections.stream()
             .filter(con -> con != null)
@@ -55,6 +57,8 @@ public class WebSocketBehaviorPage extends HomePage {
                 e.printStackTrace();
               }
             });
+
+        // このページ（Session）によるonMessageが呼び出された回数をカウントアップし、コンポーネントを更新する
         counterModel.setObject(counterModel.getObject() + 1);
         handler.add(coutner);
       }
