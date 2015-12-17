@@ -1,5 +1,8 @@
 package javado.page;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import lombok.val;
@@ -11,6 +14,12 @@ import org.apache.wicket.ajax.attributes.CallbackParameter;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
+import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.list.ListItem;
+import org.apache.wicket.markup.html.list.ListView;
+import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
 
 public class CallbackFunctionPage extends HomePage {
   private static final long serialVersionUID = 3240547016801539473L;
@@ -22,6 +31,28 @@ public class CallbackFunctionPage extends HomePage {
 
   public CallbackFunctionPage() {
     super(null);
+
+    IModel<List<String>> model = Model.ofList(new ArrayList<>());
+    
+    val wmc = new WebMarkupContainer("wmc") {
+      private static final long serialVersionUID = -2227830433028296454L;
+
+      @Override
+      protected void onInitialize() {
+        super.onInitialize();
+        setOutputMarkupId(true);
+      }
+    };
+    add(wmc);
+
+    wmc.add(new ListView<String>("logs", model) {
+      private static final long serialVersionUID = -8890866337333879494L;
+
+      @Override
+      protected void populateItem(ListItem<String> item) {
+        item.add(new Label("message", item.getModel()));
+      }
+    });
 
     add(new AbstractDefaultAjaxBehavior() {
       private static final long serialVersionUID = 5951711733278478L;
@@ -41,12 +72,16 @@ public class CallbackFunctionPage extends HomePage {
       @Override
       protected void respond(AjaxRequestTarget target) {
         val callBaclParms = getRequest().getRequestParameters();
-        Stream.of(PARAM1, PARAM2, PARAM3)
+        val message = Stream.of(PARAM1, PARAM2, PARAM3)
             .map(name -> name + ":" + callBaclParms.getParameterValue(name).toString())
-            .forEach(System.out::println);
+            .collect(Collectors.joining(" "));
+        model.getObject().add(message);
+        target.add(wmc);
       }
-
     });
+
+    add();
+    
   }
 
   @Override

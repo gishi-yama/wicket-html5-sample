@@ -25,9 +25,9 @@ window.onload = function() {
 
   // WebSocket でサーバからメッセージが送信されたら、htmlを書き換える
   Wicket.Event.subscribe('/websocket/message', function(jqEvent, message) {
-    var newDiv = document.createElement('div');
-    newDiv.innerHTML = message;
+    var newLi = document.createElement('li');
+    newLi.innerHTML = message;
     var target = document.getElementById('logs');
-    target.appendChild(newDiv);
+    target.appendChild(newLi);
   });
 }
