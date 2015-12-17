@@ -1,5 +1,6 @@
 function send(position) {
   if (position) {
+    // WebSocket で接続可能な時、サーバにメッセージを送信する
     if (Wicket.WebSocket.INSTANCE.ws.readyState === 1) {
       var message = position.coords.latitude + " , "
           + position.coords.longitude + " , " + position.coords.accuracy;
@@ -22,6 +23,7 @@ window.onload = function() {
     }, option);
   }, 5000);
 
+  // WebSocket でサーバからメッセージが送信されたら、htmlを書き換える
   Wicket.Event.subscribe('/websocket/message', function(jqEvent, message) {
     var newDiv = document.createElement('div');
     newDiv.innerHTML = message;

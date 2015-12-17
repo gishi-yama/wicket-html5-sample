@@ -1,5 +1,6 @@
 function send(position) {
   if (position) {
+    // Wicketで生成した sendToServer(latitude, longitude, accuracy) を呼び出す
     sendToServer(position.coords.latitude, position.coords.longitude,
         position.coords.accuracy);
   }
