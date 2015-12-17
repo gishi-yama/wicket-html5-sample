@@ -38,7 +38,6 @@ public class WebSocketBehaviorPage extends HomePage {
         applicationName = message.getApplication().getName();
         sessionId = message.getSessionId();
         key = message.getKey();
-
       }
 
       @Override
