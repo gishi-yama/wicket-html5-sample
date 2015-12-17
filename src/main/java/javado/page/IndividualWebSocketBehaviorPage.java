@@ -55,6 +55,7 @@ public class IndividualWebSocketBehaviorPage extends HomePage {
   public void renderHead(IHeaderResponse response) {
     super.renderHead(response);
     response.render(JavaScriptHeaderItem.forUrl("js/AccuratePosition.js"));
+    response.render(JavaScriptHeaderItem.forUrl("js/CallbackSocket.js"));
   }
 
 }
