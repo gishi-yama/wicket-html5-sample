@@ -1,4 +1,4 @@
-package javado;
+package javado.page;
 
 import java.io.IOException;
 

@@ -1,5 +1,10 @@
 package javado;
 
+import javado.page.GeolocationPage;
+import javado.page.HomePage;
+import javado.page.IndividualWebSocketBehaviorPage;
+import javado.page.WebSocketBehaviorPage;
+
 import org.apache.wicket.Page;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;

@@ -1,4 +1,4 @@
-package javado;
+package javado.page;
 
 import lombok.val;
 
