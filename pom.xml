@@ -21,11 +21,11 @@
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>javado</groupId>
-  <artifactId>wicketstuff-html5-sample</artifactId>
+  <artifactId>wicket-html5-sample</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
   <!-- TODO project name -->
-  <name>wicketstuff-html5-sample</name>
+  <name>wicket-html5-sample</name>
   <description></description>
   <!--
     <organization>
