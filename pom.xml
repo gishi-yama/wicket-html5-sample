@@ -74,6 +74,12 @@
       <artifactId>wicketstuff-html5</artifactId>
       <version>${wicket.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.wicketstuff</groupId>
+      <artifactId>wicketstuff-restannotations</artifactId>
+      <version>${wicket.version}</version>
+    </dependency>
+
 
     <!-- OPTIONAL DEPENDENCY
       <dependency>
