@@ -64,7 +64,8 @@ public class WebSocketBehaviorPage extends HomePage {
   @Override
   public void renderHead(IHeaderResponse response) {
     super.renderHead(response);
-    response.render(JavaScriptHeaderItem.forUrl("js/WebSocketPage.js"));
+    response.render(JavaScriptHeaderItem.forUrl("js/AccuratePosition.js"));
+    response.render(JavaScriptHeaderItem.forUrl("js/CallbackSocket.js"));
   }
 
 }
