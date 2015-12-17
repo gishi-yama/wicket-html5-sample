@@ -3,7 +3,25 @@
 <head>
 <meta charset="utf-8" />
 <script type="text/javascript">
-	
+  var http = new XMLHttpRequest();
+  var url = "WebPageAsAPI";
+  var params = "param1=hoge&param2=hogehoge";
+  http.open("POST", url, true);
+
+  //Send the proper header information along with the request
+  http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+  http.onreadystatechange = function() {
+    //Call a function when the state changes.
+    if (http.readyState == 4) {
+      if (http.status == 200) {
+        console.log(http.responseText);
+      } else {
+        console.error('failed : ' + http.statusText);
+      }
+    }
+  }
+  http.send(params);
 </script>
 </head>
 <body>
