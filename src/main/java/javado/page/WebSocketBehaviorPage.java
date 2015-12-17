@@ -43,9 +43,11 @@ public class WebSocketBehaviorPage extends HomePage {
 
       @Override
       protected void onMessage(WebSocketRequestHandler handler, TextMessage message) {
-        val registry = new SimpleWebSocketConnectionRegistry();
+        String output = message.getText() + " : " + sessionId;
+        System.out.println(output);
 
         // WebSocket接続しているクライアント全てに、他のクライアントからのメッセージを加工して送信する
+        val registry = new SimpleWebSocketConnectionRegistry();
         val connections = registry.getConnections(Application.get(applicationName));
         connections.stream()
             .filter(con -> con != null)

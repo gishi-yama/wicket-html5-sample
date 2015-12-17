@@ -23,7 +23,7 @@ import org.apache.wicket.model.Model;
 
 public class CallbackFunctionPage extends HomePage {
   private static final long serialVersionUID = 3240547016801539473L;
-  
+
   private static final String FUNCTION_PREFIX = "sendToServer = ";
   private static final String PARAM1 = "latitude";
   private static final String PARAM2 = "longitude";
@@ -32,8 +32,8 @@ public class CallbackFunctionPage extends HomePage {
   public CallbackFunctionPage() {
     super(null);
 
-    IModel<List<String>> model = Model.ofList(new ArrayList<>());
-    
+    IModel<List<String>> logsModel = Model.ofList(new ArrayList<>());
+
     val wmc = new WebMarkupContainer("wmc") {
       private static final long serialVersionUID = -2227830433028296454L;
 
@@ -45,7 +45,7 @@ public class CallbackFunctionPage extends HomePage {
     };
     add(wmc);
 
-    wmc.add(new ListView<String>("logs", model) {
+    wmc.add(new ListView<String>("logs", logsModel) {
       private static final long serialVersionUID = -8890866337333879494L;
 
       @Override
@@ -54,12 +54,14 @@ public class CallbackFunctionPage extends HomePage {
       }
     });
 
+    // Wicketによる JavaScript function（serverTosend =...）を作成するBehavior
     add(new AbstractDefaultAjaxBehavior() {
       private static final long serialVersionUID = 5951711733278478L;
 
       @Override
       public void renderHead(Component component, IHeaderResponse response) {
         super.renderHead(component, response);
+        // functionの中身をを生成する
         CharSequence function = getCallbackFunction(
             CallbackParameter.explicit(PARAM1),
             CallbackParameter.explicit(PARAM2),
@@ -71,17 +73,19 @@ public class CallbackFunctionPage extends HomePage {
 
       @Override
       protected void respond(AjaxRequestTarget target) {
+        // functionに渡された引数を取得する
         val callBaclParms = getRequest().getRequestParameters();
         val message = Stream.of(PARAM1, PARAM2, PARAM3)
             .map(name -> name + ":" + callBaclParms.getParameterValue(name).toString())
             .collect(Collectors.joining(" "));
-        model.getObject().add(message);
+        System.out.println(message);
+
+        // 送信されたメッセージをlogsModelに追加し、ListViewをAjaxで再描画する
+        logsModel.getObject().add(message);
         target.add(wmc);
       }
     });
 
-    add();
-    
   }
 
   @Override
