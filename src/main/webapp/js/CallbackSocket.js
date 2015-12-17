@@ -9,15 +9,17 @@ function send(position) {
 }
 
 window.onload = function() {
+  var option = {
+    limit : 50,
+    timeout : 4900
+  }
+
   setInterval(function() {
     getAccuratePosition(function(position) {
       send(position);
     }, function(error) {
       console.error('失敗：' + error.message + '(' + error.code + ')')
-    }, {
-      limit : 50,
-      timeout : 4900
-    });
+    }, option);
   }, 5000);
 
   Wicket.Event.subscribe('/websocket/message', function(jqEvent, message) {
