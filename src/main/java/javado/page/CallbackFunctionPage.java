@@ -13,7 +13,8 @@ import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 
 public class CallbackFunctionPage extends HomePage {
-
+  private static final long serialVersionUID = 3240547016801539473L;
+  
   private static final String FUNCTION_PREFIX = "sendToServer = ";
   private static final String PARAM1 = "latitude";
   private static final String PARAM2 = "longitude";
@@ -23,6 +24,7 @@ public class CallbackFunctionPage extends HomePage {
     super(null);
 
     add(new AbstractDefaultAjaxBehavior() {
+      private static final long serialVersionUID = 5951711733278478L;
 
       @Override
       public void renderHead(Component component, IHeaderResponse response) {
