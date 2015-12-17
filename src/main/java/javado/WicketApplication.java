@@ -1,5 +1,6 @@
 package javado;
 
+import javado.page.CallbackFunctionPage;
 import javado.page.GeolocationPage;
 import javado.page.HomePage;
 import javado.page.IndividualWebSocketBehaviorPage;
@@ -34,6 +35,7 @@ public class WicketApplication extends WebApplication
     mount(GeolocationPage.class);
     mount(WebSocketBehaviorPage.class);
     mount(IndividualWebSocketBehaviorPage.class);
+    mount(CallbackFunctionPage.class);
   }
   
   public void mount(Class<? extends Page> pageClass) {

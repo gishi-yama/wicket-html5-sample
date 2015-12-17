@@ -19,6 +19,7 @@ public class HomePage extends WebPage {
     add(new MyBookmarkablePageLink<>("toGeolocationPage", GeolocationPage.class));
     add(new MyBookmarkablePageLink<>("toWebSocketBehaviorPage", WebSocketBehaviorPage.class));
     add(new MyBookmarkablePageLink<>("toIndividualWebSocketBehaviorPage", IndividualWebSocketBehaviorPage.class));
+    add(new MyBookmarkablePageLink<>("toCallbackFunctionPage", CallbackFunctionPage.class));
     add(new Label("pageName", getPageName()));
   }
 
